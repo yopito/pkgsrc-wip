@@ -1,7 +1,8 @@
 # $NetBSD$
 
+# XXX fix path in config files, use libexec (same burp 1.x)
 # XXX popt usefull ? burp 1.x using it
-# XXX DEPENDS ? perl, openssl, ...
+# XXX DEPENDS ? perl, openssl, librsync, ...
 # XXX PLIST content
 # XXX patches from burp 1.x ?
 # XXX split into subpackages: -doc, -client, -server
