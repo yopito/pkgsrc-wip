@@ -1,4 +1,5 @@
-# XXX what about popt ? burp 1.x using it
+# XXX popt usefull ? burp 1.x using it
+# XXX DEPENDS ? perl, openssl, ...
 # XXX PLIST content
 # XXX patches from burp 1.x ?
 # XXX split into subpackages: -doc, -client, -server
@@ -29,10 +30,11 @@ pre-configure:
 	cd ${WRKSRC} && autoreconf -fvi
 
 
-#XXX#.include "../../devel/popt/buildlink3.mk"
+.include "../../devel/popt/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../net/librsync/buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"
 .include "../../devel/uthash/buildlink3.mk"
 .include "../../devel/yajl/buildlink3.mk"
+.include "../../devel/ncurses/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"
