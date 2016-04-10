@@ -1,0 +1,18 @@
+# $NetBSD$
+
+GITHUB_PROJECT=	burp
+DISTNAME=	2.0.36
+PKGNAME=	${GITHUB_PROJECT}-${DISTNAME}
+CATEGORIES=	wip
+MASTER_SITES=	${MASTER_SITE_GITHUB:=grke/}
+DIST_SUBDIR=	${GITHUB_PROJECT}
+
+MAINTAINER=	INSERT_YOUR_MAIL_ADDRESS_HERE
+HOMEPAGE=	${MASTER_SITE_GITHUB:=grke/burp/}
+COMMENT=	TODO: Short description of the package
+#LICENSE=	# TODO: (see mk/license.mk)
+
+WRKSRC=		${WRKDIR}/burp-2.0.36
+USE_LANGUAGES=	c c++
+
+.include "../../mk/bsd.pkg.mk"
