@@ -1,3 +1,5 @@
+# $NetBSD$
+
 # XXX popt usefull ? burp 1.x using it
 # XXX DEPENDS ? perl, openssl, ...
 # XXX PLIST content
@@ -5,8 +7,6 @@
 # XXX split into subpackages: -doc, -client, -server
 # XXX warns about incompat between 1.x and 2.x
 # XXX conflict with burp 1.x package
-
-# $NetBSD$
 
 GITHUB_PROJECT=	burp
 #PKGREVISION=	1
@@ -17,7 +17,7 @@ MASTER_SITES=	${MASTER_SITE_GITHUB:=grke/}
 DIST_SUBDIR=	${GITHUB_PROJECT}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://burp.grke.net
+HOMEPAGE=	http://burp.grke.net/
 COMMENT=	Networked backup and restore program
 LICENSE=	gnu-agpl-v3
 
