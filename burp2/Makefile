@@ -1,6 +1,13 @@
 # $NetBSD$
 
+# XXX impact of PKG_SYSCONFSUBDIR ?
+# XXX startup script ?
 # XXX burp 1.x has INSTALL/DEINSTALL script.
+# XXX sample config files should use pkg/etc/ as paths (instead of examples/...)
+# XXX scripts in libexec:
+#     -/tmp/pkg/share/burp/scripts/notify_script
+#     +/tmp/pkg/libexec/burp/notify_script
+# XXX config files are generated on install phase, so do not modify sysconfig but move files instead.
 # XXX compare config files content with burp 1.x (esp. paths)
 # XXX work/.destdir/tmp/pkg/var/spool/burp
 # XXX fix path in config files, use libexec (same than burp 1.x)
@@ -31,18 +38,23 @@ USE_LANGUAGES=	c c++
 GNU_CONFIGURE=	yes
 USE_TOOLS+=	autoreconf automake m4
 
-CONFIGURE_ARGS+=	--sysconfdir=${PREFIX}/share/examples/burp \
+PKG_SYSCONFSUBDIR=	burp
+
+pre-configure:
+	cd ${WRKSRC} && autoreconf -fvi
+
+CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR:Q} \
 			--mandir=${PREFIX}/${PKGMANDIR} \
 			--sbindir=${PREFIX}/sbin \
 			--bindir=${PREFIX}/sbin \
 			--libexecdir=${PREFIX}/libexec/burp
 
-# 'install-all': also install config files and scripts
+# 'install-all': generate and install config files and scripts
 INSTALL_TARGET=	install-all
 
-pre-configure:
-	cd ${WRKSRC} && autoreconf -fvi
-
+post-install:
+	${MKDIR} ${DESTDIR}${PREFIX}/share/examples/burp
+	${MV} ${DESTDIR}${PKG_SYSCONFDIR:Q}/* ${DESTDIR}${PREFIX}/share/examples/burp/.
 
 .include "../../devel/popt/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
