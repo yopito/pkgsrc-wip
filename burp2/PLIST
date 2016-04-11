@@ -1,5 +1,4 @@
 @comment $NetBSD$
-bin/vss_strip
 man/man8/bedup.8
 man/man8/bsigs.8
 man/man8/burp.8
@@ -9,6 +8,7 @@ sbin/bedup
 sbin/bsigs
 sbin/burp
 sbin/burp_ca
+sbin/vss_strip
 share/burp/scripts/notify_script
 share/burp/scripts/ssl_extra_checks_script
 share/burp/scripts/summary_script
@@ -37,3 +37,8 @@ share/doc/burp/status-monitor.txt
 share/doc/burp/tests.txt
 share/doc/burp/timer_script.txt
 share/doc/burp/working_dir.txt
+share/examples/burp/CA.cnf
+share/examples/burp/burp-server.conf
+share/examples/burp/burp.conf
+share/examples/burp/clientconfdir/incexc/example
+share/examples/burp/clientconfdir/testclient

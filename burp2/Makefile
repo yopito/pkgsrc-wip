@@ -1,6 +1,10 @@
 # $NetBSD$
 
-# XXX fix path in config files, use libexec (same burp 1.x)
+# XXX burp 1.x has INSTALL/DEINSTALL script.
+# XXX compare config files content with burp 1.x (esp. paths)
+# XXX work/.destdir/tmp/pkg/var/spool/burp
+# XXX fix path in config files, use libexec (same than burp 1.x)
+# XXX gettext ?
 # XXX popt usefull ? burp 1.x using it
 # XXX DEPENDS ? perl, openssl, librsync, ...
 # XXX PLIST content
@@ -26,6 +30,15 @@ WRKSRC=		${WRKDIR}/${GITHUB_PROJECT}-${DISTNAME}
 USE_LANGUAGES=	c c++
 GNU_CONFIGURE=	yes
 USE_TOOLS+=	autoreconf automake m4
+
+CONFIGURE_ARGS+=	--sysconfdir=${PREFIX}/share/examples/burp \
+			--mandir=${PREFIX}/${PKGMANDIR} \
+			--sbindir=${PREFIX}/sbin \
+			--bindir=${PREFIX}/sbin \
+			--libexecdir=${PREFIX}/libexec/burp
+
+# 'install-all': also install config files and scripts
+INSTALL_TARGET=	install-all
 
 pre-configure:
 	cd ${WRKSRC} && autoreconf -fvi
