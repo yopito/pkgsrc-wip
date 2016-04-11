@@ -7,11 +7,9 @@
 # XXX gettext ?
 # XXX popt usefull ? burp 1.x using it
 # XXX DEPENDS ? perl, openssl, librsync, ...
-# XXX PLIST content
 # XXX patches from burp 1.x ?
 # XXX split into subpackages: -doc, -client, -server
 # XXX warns about incompat between 1.x and 2.x
-# XXX conflict with burp 1.x package
 
 GITHUB_PROJECT=	burp
 #PKGREVISION=	1
@@ -25,6 +23,8 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://burp.grke.net/
 COMMENT=	Networked backup and restore program
 LICENSE=	gnu-agpl-v3
+
+CONFLICTS=	burp-[0-9]*
 
 WRKSRC=		${WRKDIR}/${GITHUB_PROJECT}-${DISTNAME}
 USE_LANGUAGES=	c c++
