@@ -1,16 +1,16 @@
 # $NetBSD$
 
+# XXX paths are hardcoded with LOCALBASE in config files. normal ?
+# XXX libexec/burp/summary_script : /usr/sbin/burp
+# XXX burp 1.x: missing share/examples/burp/autoupgrade/
+# XXX burp_ca is a *bash* shell script
+# XXX burp 1.x libexec scripts: all with /bin/sh (not bash)
+# XXX burp_ca: etc=/etc/burp
 # XXX impact of PKG_SYSCONFSUBDIR ?
 # XXX startup script ?
 # XXX burp 1.x has INSTALL/DEINSTALL script.
-# XXX sample config files should use pkg/etc/ as paths (instead of examples/...)
-# XXX scripts in libexec:
-#     -/tmp/pkg/share/burp/scripts/notify_script
-#     +/tmp/pkg/libexec/burp/notify_script
-# XXX config files are generated on install phase, so do not modify sysconfig but move files instead.
 # XXX compare config files content with burp 1.x (esp. paths)
 # XXX work/.destdir/tmp/pkg/var/spool/burp
-# XXX fix path in config files, use libexec (same than burp 1.x)
 # XXX gettext ?
 # XXX popt usefull ? burp 1.x using it
 # XXX DEPENDS ? perl, openssl, librsync, ...
@@ -47,12 +47,13 @@ CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR:Q} \
 			--mandir=${PREFIX}/${PKGMANDIR} \
 			--sbindir=${PREFIX}/sbin \
 			--bindir=${PREFIX}/sbin \
-			--libexecdir=${PREFIX}/libexec/burp
+			scriptdir=${PREFIX}/libexec/burp
 
 # 'install-all': generate and install config files and scripts
 INSTALL_TARGET=	install-all
 
 post-install:
+	# config/scripts are generated on install phase (not just copied)
 	${MKDIR} ${DESTDIR}${PREFIX}/share/examples/burp
 	${MV} ${DESTDIR}${PKG_SYSCONFDIR:Q}/* ${DESTDIR}${PREFIX}/share/examples/burp/.
 

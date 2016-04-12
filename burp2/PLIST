@@ -1,4 +1,8 @@
 @comment $NetBSD$
+libexec/burp/notify_script
+libexec/burp/ssl_extra_checks_script
+libexec/burp/summary_script
+libexec/burp/timer_script
 man/man8/bedup.8
 man/man8/bsigs.8
 man/man8/burp.8
@@ -9,10 +13,6 @@ sbin/bsigs
 sbin/burp
 sbin/burp_ca
 sbin/vss_strip
-share/burp/scripts/notify_script
-share/burp/scripts/ssl_extra_checks_script
-share/burp/scripts/summary_script
-share/burp/scripts/timer_script
 share/doc/burp/CHANGELOG
 share/doc/burp/CONTRIBUTORS
 share/doc/burp/DONATIONS
