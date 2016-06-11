@@ -1,6 +1,6 @@
 # $NetBSD$
 
-# XXX missing folder etc/CA-client/ (compared to XBPS burp)
+# XXX missing folder etc/CA-client/ (compared to XBPS packaging)
 # XXX libexec/burp/summary_script : /usr/sbin/burp is hardcoded
 # XXX burp_ca: hardcoded "etc=/etc/burp"
 # XXX burp 1.x burp_ca notify_script and timer_script: all with /bin/sh (not bash)
@@ -17,7 +17,7 @@
 # XXX patches from burp 1.x ?
 # XXX split into subpackages: -doc, -client, -server
 # XXX warns about incompat between 1.x and 2.x
-# XXX burp1 packaging: pkgsrc/sysutils/burp/
+# XXX burp1 packaging in pkgsrc/sysutils/burp/
 
 #PKGREVISION=	1
 _VERSION=	2.0.40
@@ -58,7 +58,7 @@ INSTALL_TARGET=	install-all
 
 post-install:
 	# config/scripts are generated on install phase (not just copied)
-	${MV} ${DESTDIR}${PKG_SYSCONFDIR:Q}/* ${EXAMPLESDIR}/.
+	${MV} ${DESTDIR}${PKG_SYSCONFDIR:Q}/* ${DESTDIR}${EXAMPLESDIR}/.
 
 .include "../../devel/popt/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
