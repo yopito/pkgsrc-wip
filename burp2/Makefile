@@ -17,14 +17,15 @@
 # XXX patches from burp 1.x ?
 # XXX split into subpackages: -doc, -client, -server
 # XXX warns about incompat between 1.x and 2.x
+# XXX burp1 packaging: pkgsrc/sysutils/burp/
 
-GITHUB_PROJECT=	burp
 #PKGREVISION=	1
-DISTNAME=	2.0.36
-PKGNAME=	burp2-${DISTNAME}
+_VERSION=	2.0.40
+DISTNAME=	burp-${_VERSION}
+PKGNAME=	burp2-${_VERSION}
 CATEGORIES=	sysutils archivers
-MASTER_SITES=	${MASTER_SITE_GITHUB:=grke/}
-DIST_SUBDIR=	${GITHUB_PROJECT}
+MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=burp/}
+EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://burp.grke.net/
@@ -33,10 +34,9 @@ LICENSE=	gnu-agpl-v3
 
 CONFLICTS=	burp-[0-9]*
 
-WRKSRC=		${WRKDIR}/${GITHUB_PROJECT}-${DISTNAME}
+WRKSRC=		${WRKDIR}/${DISTNAME}
 USE_LANGUAGES=	c c++
 GNU_CONFIGURE=	yes
-USE_TOOLS+=	autoreconf automake m4
 
 PKG_SYSCONFSUBDIR=	burp
 
@@ -46,9 +46,6 @@ INSTALLATION_DIRS+=	${EXAMPLESDIR}
 CONF_FILES+=		${EXAMPLESDIR}/CA.cnf           ${PKG_SYSCONFDIR}/CA.cnf
 CONF_FILES+=		${EXAMPLESDIR}/burp.conf        ${PKG_SYSCONFDIR}/burp.conf
 CONF_FILES+=		${EXAMPLESDIR}/burp-server.conf ${PKG_SYSCONFDIR}/burp-server.conf
-
-pre-configure:
-	cd ${WRKSRC} && autoreconf -fvi
 
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR:Q} \
 			--mandir=${PREFIX}/${PKGMANDIR} \
