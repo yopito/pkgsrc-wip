@@ -1,5 +1,6 @@
 # $NetBSD$
 
+# XXX etc/burp/clientconfdir/testclient removed from package ?
 # XXX missing folder etc/CA-client/ (compared to XBPS packaging)
 # XXX libexec/burp/summary_script : /usr/sbin/burp is hardcoded
 # XXX burp_ca: hardcoded "etc=/etc/burp"
@@ -15,12 +16,13 @@
 # XXX popt usefull ? burp 1.x using it
 # XXX (runtime) DEPENDS ? perl, openssl, librsync, bash, ...
 # XXX patches from burp 1.x ?
-# XXX split into subpackages: -doc, -client, -server
+# XXX split into subpackages: -doc, -client, -server (example: bacula ?)
 # XXX warns about incompat between 1.x and 2.x
-# XXX burp1 packaging in pkgsrc/sysutils/burp/
+#
+# Note: burp1 packaging in pkgsrc/sysutils/burp/
 
 #PKGREVISION=	1
-_VERSION=	2.0.40
+_VERSION=	2.0.42
 DISTNAME=	burp-${_VERSION}
 PKGNAME=	burp2-${_VERSION}
 CATEGORIES=	sysutils archivers
@@ -53,7 +55,7 @@ CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR:Q} \
 			--bindir=${PREFIX}/sbin \
 			scriptdir=${PREFIX}/libexec/burp
 
-# 'install-all': generate and install config files and scripts
+# 'install-all': also generate and install config files and scripts
 INSTALL_TARGET=	install-all
 
 post-install:
