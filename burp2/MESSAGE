@@ -1,0 +1,7 @@
+===========================================================================
+$NetBSD$
+
+CAUTION: burp 2.x client DOES NOT WORK with burp server 1.x
+
+To use with a burp-server 1.x, install the burp (v1.x) package instead.
+===========================================================================
