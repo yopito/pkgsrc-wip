@@ -1,6 +1,6 @@
 $NetBSD$
 
-SHA1 (burp-2.0.42.tar.bz2) = 18aa43ad5726b0f9bf03df8235b2fc54dc012c28
-RMD160 (burp-2.0.42.tar.bz2) = bb37a7d80127e0987fe78b3a4fada21cf6a8ea75
-SHA512 (burp-2.0.42.tar.bz2) = ea4d6693d8d8fd069b86eec5555b69df42d239b9d64dd5f273e90f5dbbdf18f201c0198f762cb319bd6ea688c602b381adb9cb1f367614df464a18be78c0091e
-Size (burp-2.0.42.tar.bz2) = 764556 bytes
+SHA1 (burp-2.0.48.tar.bz2) = ebe8125342e040afedfe0f8dd4d8b1de3df18494
+RMD160 (burp-2.0.48.tar.bz2) = 001d0a23ebc8f96e297ff1022be5d09fb8f42d5b
+SHA512 (burp-2.0.48.tar.bz2) = b7373382c2a5c81e5ff84a6a43dda010ea01412d42e682c8b50c186d6b6a829d5a8aa85a3486ff707ffcc2e49474dc2058512248b11d1646bc18bf5bd2d1102d
+Size (burp-2.0.48.tar.bz2) = 753513 bytes

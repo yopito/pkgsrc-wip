@@ -27,7 +27,7 @@
 #
 # Note: burp1 packaging in pkgsrc/sysutils/burp/
 
-VERSION=	2.0.42
+VERSION=	2.0.48
 DISTNAME=	burp-${VERSION}
 PKGNAME=	burp2-${VERSION}
 #PKGREVISION=	1
