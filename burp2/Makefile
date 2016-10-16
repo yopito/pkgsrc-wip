@@ -1,6 +1,11 @@
 # $NetBSD$
 
-# XXX etc/burp/clientconfdir/testclient removed from package ?
+# XXX no etc/burp/ config stuff, only share/examples/ ? CA.cnf, ...
+# XXX reuse patches from burp 1.x ? like etc=@PKG_SYSCONFIGDIR@/burp ?
+# XXX - when PKG_SYSCONFIGDIR is in use ? build ? install ?
+# XXX - CA.cnf needs patching
+# XXX - burp_ca needs patching, including s/bash/sh/
+# XXX etc/burp/clientconfdir/testclient : remove from package ?
 # XXX startup script ? check bacula ?
 # XXX split into subpackages: -doc, -client, -server (example: bacula ?)
 # XXX missing acl / xattr support ?
@@ -10,6 +15,7 @@
 #       checking for sys/xattr.h... yes
 #       configure:                    acl: no
 #       """
+#     => sysutils/burp/patches/patch-src-xattr.c ?
 # XXX missing folder etc/CA-client/ (compared to XBPS packaging)
 # XXX libexec/burp/summary_script : /usr/sbin/burp is hardcoded
 # XXX burp_ca: hardcoded "etc=/etc/burp"
@@ -23,7 +29,6 @@
 # XXX gettext ?
 # XXX popt usefull ? burp 1.x using it
 # XXX (runtime) DEPENDS ? perl, openssl, librsync, bash, ...
-# XXX patches from burp 1.x ?
 #
 # Note: burp1 packaging in pkgsrc/sysutils/burp/
 
@@ -51,6 +56,10 @@ PKG_SYSCONFSUBDIR=	burp
 EXAMPLESDIR=		${PREFIX}/share/examples/burp
 INSTALLATION_DIRS+=	${EXAMPLESDIR}
 
+REPLACE_SH+=		configs/certs/CA/burp_ca \
+			configs/server/notify_script \
+			configs/server/timer_script
+
 CONF_FILES+=		${EXAMPLESDIR}/CA.cnf           ${PKG_SYSCONFDIR}/CA.cnf
 CONF_FILES+=		${EXAMPLESDIR}/burp.conf        ${PKG_SYSCONFDIR}/burp.conf
 CONF_FILES+=		${EXAMPLESDIR}/burp-server.conf ${PKG_SYSCONFDIR}/burp-server.conf
@@ -60,6 +69,9 @@ CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR} \
 			--sbindir=${PREFIX}/sbin \
 			--bindir=${PREFIX}/sbin \
 			scriptdir=${PREFIX}/libexec/burp
+
+# XXX examples
+#RCD_SCRIPTS=	bacula bacula-dir bacula-sd bacula-fd
 
 # 'install-all': also generate and install config files and scripts
 INSTALL_TARGET=	install-all
