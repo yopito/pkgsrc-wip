@@ -1,34 +1,22 @@
 # $NetBSD$
 
-# XXX no etc/burp/ config stuff, only share/examples/ ? CA.cnf, ...
-# XXX reuse patches from burp 1.x ? like etc=@PKG_SYSCONFIGDIR@/burp ?
-# XXX - when PKG_SYSCONFIGDIR is in use ? build ? install ?
-# XXX - CA.cnf needs patching
-# XXX - burp_ca needs patching, including s/bash/sh/
-# XXX etc/burp/clientconfdir/testclient : remove from package ?
-# XXX startup script ? check bacula ?
+# XXX reuse patches from burp1 ? like etc=@PKG_SYSCONFIGDIR@/burp ?
+# XXX - when PKG_SYSCONFIGDIR is in use ? build ? pkg install ?
+# XXX startup script for burp-server: check bacula sample
 # XXX split into subpackages: -doc, -client, -server (example: bacula ?)
-# XXX missing acl / xattr support ?
+# XXX missing acl support ?
 #       """
 #       checking sys/xattr.h usability... yes
 #       checking sys/xattr.h presence... yes
 #       checking for sys/xattr.h... yes
 #       configure:                    acl: no
 #       """
-#     => sysutils/burp/patches/patch-src-xattr.c ?
-# XXX missing folder etc/CA-client/ (compared to XBPS packaging)
 # XXX libexec/burp/summary_script : /usr/sbin/burp is hardcoded
-# XXX burp_ca: hardcoded "etc=/etc/burp"
-# XXX burp 1.x burp_ca notify_script and timer_script: all with /bin/sh (not bash)
-# XXX missing folder share/examples/burp/autoupgrade/ (compared to burp 1.x)
-# XXX burp_ca is a *bash* shell script ... depends on bash
-# XXX impact of PKG_SYSCONFSUBDIR ? see nothing with burp 1.x, bacula ?
+# XXX missing folder share/examples/burp/autoupgrade/ (compared to burp1)
 # XXX add cron examples
-# XXX burp 1.x has INSTALL/DEINSTALL script.
 # XXX work/.destdir/tmp/pkg/var/spool/burp
 # XXX gettext ?
-# XXX popt usefull ? burp 1.x using it
-# XXX (runtime) DEPENDS ? perl, openssl, librsync, bash, ...
+# XXX popt usefull ? burp1 using it
 #
 # Note: burp1 packaging in pkgsrc/sysutils/burp/
 
@@ -56,24 +44,32 @@ PKG_SYSCONFSUBDIR=	burp
 EXAMPLESDIR=		${PREFIX}/share/examples/burp
 INSTALLATION_DIRS+=	${EXAMPLESDIR}
 
-REPLACE_SH+=		configs/certs/CA/burp_ca \
-			configs/server/notify_script \
-			configs/server/timer_script
+SUBST_CLASSES+=		bashtosh
+SUBST_STAGE.bashtosh=	pre-configure
+SUBST_FILES.bashtosh=	configs/certs/CA/burp_ca.in
+SUBST_SED.bashtosh=	-e 's,^function ,,g'
+
+REPLACE_SH+=		configs/certs/CA/burp_ca.in
+REPLASE_SH+=		configs/server/notify_script
+REPLASE_SH+=		configs/server/timer_script
 
 CONF_FILES+=		${EXAMPLESDIR}/CA.cnf           ${PKG_SYSCONFDIR}/CA.cnf
 CONF_FILES+=		${EXAMPLESDIR}/burp.conf        ${PKG_SYSCONFDIR}/burp.conf
 CONF_FILES+=		${EXAMPLESDIR}/burp-server.conf ${PKG_SYSCONFDIR}/burp-server.conf
 
-CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR} \
-			--mandir=${PREFIX}/${PKGMANDIR} \
-			--sbindir=${PREFIX}/sbin \
-			--bindir=${PREFIX}/sbin \
-			scriptdir=${PREFIX}/libexec/burp
+MAKE_DIRS+=		${PKG_SYSCONFDIR}/CA-client
+
+CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR}
+CONFIGURE_ARGS+=	--sbindir=${PREFIX}/sbin
+CONFIGURE_ARGS+=	--bindir=${PREFIX}/bin
+CONFIGURE_ARGS+=	--localstatedir=${VARBASE}
+# without '--': '--scriptdir' is NOT a known configure arg
+CONFIGURE_ARGS+=	scriptdir=${PREFIX}/libexec/burp
 
 # XXX examples
 #RCD_SCRIPTS=	bacula bacula-dir bacula-sd bacula-fd
 
-# 'install-all': also generate and install config files and scripts
+# 'install-all': install + config files and scripts generation and installation
 INSTALL_TARGET=	install-all
 
 post-install:

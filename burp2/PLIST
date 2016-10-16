@@ -8,11 +8,11 @@ man/man8/bsigs.8
 man/man8/burp.8
 man/man8/burp_ca.8
 man/man8/vss_strip.8
+bin/vss_strip
 sbin/bedup
 sbin/bsigs
 sbin/burp
 sbin/burp_ca
-sbin/vss_strip
 share/doc/burp/CHANGELOG
 share/doc/burp/CONTRIBUTORS
 share/doc/burp/DONATIONS
